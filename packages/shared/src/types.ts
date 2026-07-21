@@ -78,3 +78,33 @@ export interface RestoreResult {
     bodyBg: string;
   };
 }
+
+// 桌宠相关
+export type PetMood = 'idle' | 'happy' | 'sleepy' | 'curious' | 'excited' | 'sad';
+export type PetAction = 'idle' | 'blink' | 'breathe' | 'hover' | 'click' | 'drag' | 'talk' | 'sleep';
+
+export interface PetState {
+  mood: PetMood;
+  action: PetAction;
+  position: { x: number; y: number };
+  lastInteraction: number;
+}
+
+export interface PetConfig {
+  id: string;
+  name: string;
+  description?: string;
+  image: string;
+  width: number;
+  height: number;
+  defaultMood?: PetMood;
+  interactions?: PetInteractionConfig[];
+}
+
+export interface PetInteractionConfig {
+  trigger: 'click' | 'hover' | 'double-click' | 'right-click' | 'drag-start' | 'drag-end';
+  action: PetAction;
+  duration?: number;
+  message?: string;
+  moodChange?: PetMood;
+}

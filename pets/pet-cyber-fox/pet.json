@@ -1,0 +1,16 @@
+{
+  "id": "pet-cyber-fox",
+  "name": "赛博狐",
+  "description": "来自未来的机械狐狸，自带霓虹光效",
+  "image": "pet.svg",
+  "width": 160,
+  "height": 160,
+  "defaultMood": "curious",
+  "interactions": [
+    { "trigger": "click", "action": "click", "duration": 600, "moodChange": "excited", "message": "数据更新中..." },
+    { "trigger": "hover", "action": "hover", "duration": 0, "moodChange": "curious", "message": "扫描中..." },
+    { "trigger": "double-click", "action": "talk", "duration": 2000, "moodChange": "excited", "message": "系统启动！" },
+    { "trigger": "drag-start", "action": "drag", "duration": 0 },
+    { "trigger": "drag-end", "action": "idle", "duration": 500, "moodChange": "happy" }
+  ]
+}

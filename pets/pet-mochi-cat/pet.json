@@ -1,0 +1,16 @@
+{
+  "id": "pet-mochi-cat",
+  "name": "麻薯猫",
+  "description": "一只软糯的小猫，喜欢打盹和被摸头",
+  "image": "pet.svg",
+  "width": 150,
+  "height": 150,
+  "defaultMood": "idle",
+  "interactions": [
+    { "trigger": "click", "action": "click", "duration": 500, "moodChange": "happy", "message": "喵~" },
+    { "trigger": "hover", "action": "hover", "duration": 0, "moodChange": "curious" },
+    { "trigger": "double-click", "action": "click", "duration": 1000, "moodChange": "excited", "message": "喵呜！" },
+    { "trigger": "drag-start", "action": "drag", "duration": 0 },
+    { "trigger": "drag-end", "action": "idle", "duration": 500, "moodChange": "happy" }
+  ]
+}
