@@ -1,0 +1,20 @@
+{
+  "name": "@skins/tests",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test --import tsx 'src/**/*.test.ts'",
+    "test:watch": "node --test --watch --import tsx 'src/**/*.test.ts'"
+  },
+  "dependencies": {
+    "@skins/shared": "workspace:*",
+    "@skins/cdp-injector": "workspace:*",
+    "@skins/skin-manager": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "@types/node": "^22.0.0"
+  }
+}
