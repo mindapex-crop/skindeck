@@ -1,0 +1,6 @@
+{
+  "id": "star-portal",
+  "displayName": "Star Portal",
+  "description": "A tiny golden star hovering above a pixel portal.",
+  "spritesheetPath": "spritesheet.webp"
+}

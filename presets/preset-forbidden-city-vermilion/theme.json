@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-forbidden-city-vermilion",
+  "name": "故宫红墙金瓦",
+  "nameEn": "Forbidden City Vermilion",
+  "names": {
+    "zh-CN": "故宫红墙金瓦",
+    "zh-TW": "故宮紅牆金瓦",
+    "en-US": "Forbidden City Vermilion",
+    "ja-JP": "故宮の朱壁金瓦",
+    "ko-KR": "자금성 주벽금와",
+    "es-ES": "Ciudad Prohibida Bermeja",
+    "pt-BR": "Cidade Proibida Vermelha",
+    "ar-SA": "المدينة المحرمة القرمزية",
+    "fr-FR": "Cité Interdite Vermillon",
+    "de-DE": "Verbotene Stadt Scharlachrot"
+  },
+  "image": "background.png",
+  "appearance": "dark",
+  "region": "cn",
+  "art": {
+    "focusX": 0.74,
+    "focusY": 0.42,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#2a1410",
+    "panel": "rgba(40,18,14,.72)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#d4af37",
+    "accentAlt": "#d4af37",
+    "secondary": "#d4af37",
+    "highlight": "#d4af37",
+    "text": "#f6e7d2",
+    "muted": "#c9a98a",
+    "line": "rgba(212,175,55,.35)"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "id": "cabin-face",
+  "displayName": "Cabin",
+  "description": "A tiny all-face rectangular screen companion with expressive cyan glyphs.",
+  "spritesheetPath": "spritesheet.webp"
+}

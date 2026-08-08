@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-paris-eiffel-night",
+  "name": "巴黎铁塔夜",
+  "nameEn": "Paris Eiffel Night",
+  "names": {
+    "zh-CN": "巴黎铁塔夜",
+    "zh-TW": "巴黎鐵塔夜",
+    "en-US": "Paris Eiffel Night",
+    "ja-JP": "パリ・エッフェル塔の夜",
+    "ko-KR": "파리 에펠탑의 밤",
+    "es-ES": "Torre Eiffel de París de Noche",
+    "pt-BR": "Torre Eiffel de Paris à Noite",
+    "ar-SA": "برج إيفل في باريس ليلًا",
+    "fr-FR": "Tour Eiffel de Paris la Nuit",
+    "de-DE": "Paris-Eiffelturm bei Nacht"
+  },
+  "image": "background.png",
+  "appearance": "dark",
+  "region": "eu",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.4,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#14101a",
+    "panel": "rgba(20,16,26,.76)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#e8b84b",
+    "accentAlt": "#e8b84b",
+    "secondary": "#e8b84b",
+    "highlight": "#e8b84b",
+    "text": "#f5e8d0",
+    "muted": "#c2a878",
+    "line": "rgba(232,184,75,.32)"
+  }
+}

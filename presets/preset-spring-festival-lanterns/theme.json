@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-spring-festival-lanterns",
+  "name": "春节灯笼",
+  "nameEn": "Spring Festival Lanterns",
+  "names": {
+    "zh-CN": "春节灯笼",
+    "zh-TW": "春節燈籠",
+    "en-US": "Spring Festival Lanterns",
+    "ja-JP": "春節のランタン",
+    "ko-KR": "춘제 등롱",
+    "es-ES": "Faroles del Festival de Primavera",
+    "pt-BR": "Lanternas do Festival de Primavera",
+    "ar-SA": "فوانيس مهرجان الربيع",
+    "fr-FR": "Lanternes du Festival du Printemps",
+    "de-DE": "Laternen des Frühlingsfestes"
+  },
+  "image": "background.png",
+  "appearance": "dark",
+  "region": "cn",
+  "art": {
+    "focusX": 0.73,
+    "focusY": 0.45,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#240a0a",
+    "panel": "rgba(36,10,10,.74)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#ff5a3c",
+    "accentAlt": "#ff5a3c",
+    "secondary": "#ff5a3c",
+    "highlight": "#ff5a3c",
+    "text": "#ffe7c2",
+    "muted": "#d79a7a",
+    "line": "rgba(255,90,60,.34)"
+  }
+}

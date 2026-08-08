@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-california-coast",
+  "name": "加州海岸",
+  "nameEn": "California Coast",
+  "names": {
+    "zh-CN": "加州海岸",
+    "zh-TW": "加州海岸",
+    "en-US": "California Coast",
+    "ja-JP": "カリフォルニア海岸",
+    "ko-KR": "캘리포니아 해안",
+    "es-ES": "Costa de California",
+    "pt-BR": "Costa da Califórnia",
+    "ar-SA": "ساحل كاليفورنيا",
+    "fr-FR": "Côte de Californie",
+    "de-DE": "Kalifornische Küste"
+  },
+  "image": "background.png",
+  "appearance": "light",
+  "region": "eu",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.5,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#e8f0f8",
+    "panel": "rgba(255,255,255,.62)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#2a8ab8",
+    "accentAlt": "#2a8ab8",
+    "secondary": "#2a8ab8",
+    "highlight": "#2a8ab8",
+    "text": "#2b2b2b",
+    "muted": "#7a8a9a",
+    "line": "rgba(42,138,184,.3)"
+  }
+}

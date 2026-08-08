@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-cyber-guochao-neon",
+  "name": "赛博国潮",
+  "nameEn": "Cyber Guochao Neon",
+  "names": {
+    "zh-CN": "赛博国潮",
+    "zh-TW": "賽博國潮",
+    "en-US": "Cyber Guochao Neon",
+    "ja-JP": "サイバー国潮",
+    "ko-KR": "사이버 궈차오",
+    "es-ES": "Neón Ciber-Guochao",
+    "pt-BR": "Neon Ciber-Guochao",
+    "ar-SA": "نيون سايبري غوتشاو",
+    "fr-FR": "Néon Cyber-Guochao",
+    "de-DE": "Cyber-Guochao-Neon"
+  },
+  "image": "background.png",
+  "appearance": "dark",
+  "region": "cn",
+  "art": {
+    "focusX": 0.73,
+    "focusY": 0.45,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#0c0a16",
+    "panel": "rgba(12,10,22,.78)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#ff3d7f",
+    "accentAlt": "#ff3d7f",
+    "secondary": "#ff3d7f",
+    "highlight": "#ff3d7f",
+    "text": "#e8eaff",
+    "muted": "#9a8fd0",
+    "line": "rgba(255,61,127,.34)"
+  }
+}

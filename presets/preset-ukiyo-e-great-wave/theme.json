@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-ukiyo-e-great-wave",
+  "name": "浮世绘巨浪",
+  "nameEn": "Ukiyo-e Great Wave",
+  "names": {
+    "zh-CN": "浮世绘巨浪",
+    "zh-TW": "浮世繪巨浪",
+    "en-US": "Ukiyo-e Great Wave",
+    "ja-JP": "浮世絵神奈川沖浪裏",
+    "ko-KR": "우키요에 거대한 파도",
+    "es-ES": "Gran Ola Ukiyo-e",
+    "pt-BR": "Grande Onda Ukiyo-e",
+    "ar-SA": "الموجة الكبرى لليكيو-إي",
+    "fr-FR": "Grande Vague Ukiyo-e",
+    "de-DE": "Ukiyo-e-Große Welle"
+  },
+  "image": "background.png",
+  "appearance": "dark",
+  "region": "jp-kr",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.45,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#0e1b2a",
+    "panel": "rgba(14,27,42,.76)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#2f6fb0",
+    "accentAlt": "#2f6fb0",
+    "secondary": "#2f6fb0",
+    "highlight": "#2f6fb0",
+    "text": "#eef4fb",
+    "muted": "#8fa9c4",
+    "line": "rgba(47,111,176,.32)"
+  }
+}

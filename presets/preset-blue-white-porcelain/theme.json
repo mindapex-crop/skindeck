@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-blue-white-porcelain",
+  "name": "青花瓷纹",
+  "nameEn": "Blue-White Porcelain",
+  "names": {
+    "zh-CN": "青花瓷纹",
+    "zh-TW": "青花瓷紋",
+    "en-US": "Blue-White Porcelain",
+    "ja-JP": "青花磁器文様",
+    "ko-KR": "청화백자 문양",
+    "es-ES": "Porcelana Azul y Blanca",
+    "pt-BR": "Porcelana Azul e Branca",
+    "ar-SA": "الخزف الأزرق والأبيض",
+    "fr-FR": "Porcelaine Bleue et Blanche",
+    "de-DE": "Blau-Weißes Porzellan"
+  },
+  "image": "background.png",
+  "appearance": "light",
+  "region": "cn",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.5,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#f0f2f0",
+    "panel": "rgba(255,255,255,.62)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#2a5a8a",
+    "accentAlt": "#2a5a8a",
+    "secondary": "#2a5a8a",
+    "highlight": "#2a5a8a",
+    "text": "#2b2b2b",
+    "muted": "#7a766c",
+    "line": "rgba(42,90,138,.3)"
+  }
+}

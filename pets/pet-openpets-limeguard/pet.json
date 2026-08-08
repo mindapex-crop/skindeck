@@ -1,0 +1,7 @@
+{
+  "id": "limeguard",
+  "displayName": "Limeguard",
+  "description": "A bright green slime knight with a helmet, sword, and shield.",
+  "spritesheetPath": "spritesheet.webp",
+  "category": "western"
+}

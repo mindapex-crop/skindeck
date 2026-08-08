@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-kyoto-moss-garden",
+  "name": "京都苔寺",
+  "nameEn": "Kyoto Moss Garden",
+  "names": {
+    "zh-CN": "京都苔寺",
+    "zh-TW": "京都苔寺",
+    "en-US": "Kyoto Moss Garden",
+    "ja-JP": "京都苔寺",
+    "ko-KR": "교토 이끼 사찰",
+    "es-ES": "Jardín de Musgo de Kyoto",
+    "pt-BR": "Jardim de Musgo de Kyoto",
+    "ar-SA": "حديقة الطحالب في كيوتو",
+    "fr-FR": "Jardin de Mousse de Kyoto",
+    "de-DE": "Kyoto-Moosgarten"
+  },
+  "image": "background.png",
+  "appearance": "dark",
+  "region": "jp-kr",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.5,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#0e1a12",
+    "panel": "rgba(14,26,18,.76)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#5a9a6a",
+    "accentAlt": "#5a9a6a",
+    "secondary": "#5a9a6a",
+    "highlight": "#5a9a6a",
+    "text": "#e0f0e4",
+    "muted": "#88b098",
+    "line": "rgba(90,154,106,.32)"
+  }
+}

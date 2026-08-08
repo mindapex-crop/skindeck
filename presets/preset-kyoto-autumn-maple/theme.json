@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-kyoto-autumn-maple",
+  "name": "京都红叶",
+  "nameEn": "Kyoto Autumn Maple",
+  "names": {
+    "zh-CN": "京都红叶",
+    "zh-TW": "京都紅葉",
+    "en-US": "Kyoto Autumn Maple",
+    "ja-JP": "京都の紅葉",
+    "ko-KR": "교토 단풍",
+    "es-ES": "Arce Otoñal de Kyoto",
+    "pt-BR": "Bordo Outonal de Kyoto",
+    "ar-SA": "القيقوبا الخريفية في كيوتو",
+    "fr-FR": "Érable Automnal de Kyoto",
+    "de-DE": "Kyoto-Herbstahorn"
+  },
+  "image": "background.png",
+  "appearance": "dark",
+  "region": "jp-kr",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.45,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#1a120c",
+    "panel": "rgba(26,18,12,.74)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#d45a2a",
+    "accentAlt": "#d45a2a",
+    "secondary": "#d45a2a",
+    "highlight": "#d45a2a",
+    "text": "#f5e0c8",
+    "muted": "#c29472",
+    "line": "rgba(212,90,42,.32)"
+  }
+}

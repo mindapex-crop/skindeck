@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-halong-bay-mist",
+  "name": "下龙湾晨雾",
+  "nameEn": "Halong Bay Mist",
+  "names": {
+    "zh-CN": "下龙湾晨雾",
+    "zh-TW": "下龍灣晨霧",
+    "en-US": "Halong Bay Mist",
+    "ja-JP": "ハロン湾の朝霧",
+    "ko-KR": "하롱베이 새벽 안개",
+    "es-ES": "Bahía de Halong entre Niebla",
+    "pt-BR": "Baía de Halong na Névoa",
+    "ar-SA": "خليج هالونغ الضبابي",
+    "fr-FR": "Baie d'Halong Brumeuse",
+    "de-DE": "Halong-Bucht im Nebel"
+  },
+  "image": "background.png",
+  "appearance": "dark",
+  "region": "sea",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.5,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#0e1a18",
+    "panel": "rgba(14,26,24,.76)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#4aa89a",
+    "accentAlt": "#4aa89a",
+    "secondary": "#4aa89a",
+    "highlight": "#4aa89a",
+    "text": "#e0f0ec",
+    "muted": "#88b0a8",
+    "line": "rgba(74,168,154,.32)"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-jeju-volcanic-coast",
+  "name": "济州玄武",
+  "nameEn": "Jeju Volcanic Coast",
+  "names": {
+    "zh-CN": "济州玄武",
+    "zh-TW": "濟州玄武",
+    "en-US": "Jeju Volcanic Coast",
+    "ja-JP": "済州火山海岸",
+    "ko-KR": "제주 화산 해안",
+    "es-ES": "Costa Volcánica de Jeju",
+    "pt-BR": "Costa Vulcânica de Jeju",
+    "ar-SA": "الساحل البركاني في جيجو",
+    "fr-FR": "Côte Volcanique de Jeju",
+    "de-DE": "Jeju-Vulkanküste"
+  },
+  "image": "background.png",
+  "appearance": "dark",
+  "region": "jp-kr",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.5,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#0e1a1e",
+    "panel": "rgba(14,26,30,.76)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#2a9d8f",
+    "accentAlt": "#2a9d8f",
+    "secondary": "#2a9d8f",
+    "highlight": "#2a9d8f",
+    "text": "#e0f0ec",
+    "muted": "#88b0a8",
+    "line": "rgba(42,157,143,.32)"
+  }
+}

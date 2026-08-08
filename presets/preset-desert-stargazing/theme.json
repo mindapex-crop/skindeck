@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-desert-stargazing",
+  "name": "沙漠星空",
+  "nameEn": "Desert Stargazing",
+  "names": {
+    "zh-CN": "沙漠星空",
+    "zh-TW": "沙漠星空",
+    "en-US": "Desert Stargazing",
+    "ja-JP": "砂漠の星空",
+    "ko-KR": "사막 별밤",
+    "es-ES": "Cielo Estrellado del Desierto",
+    "pt-BR": "Céu Estrelado do Deserto",
+    "ar-SA": "سماء الصحراء المرصعة بالنجوم",
+    "fr-FR": "Ciel Étoilé du Désert",
+    "de-DE": "Wüstensternenhimmel"
+  },
+  "image": "background.png",
+  "appearance": "dark",
+  "region": "me",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.35,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#070a16",
+    "panel": "rgba(7,10,22,.8)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#7a5cff",
+    "accentAlt": "#7a5cff",
+    "secondary": "#7a5cff",
+    "highlight": "#7a5cff",
+    "text": "#eaeafb",
+    "muted": "#9a93c8",
+    "line": "rgba(122,92,255,.34)"
+  }
+}

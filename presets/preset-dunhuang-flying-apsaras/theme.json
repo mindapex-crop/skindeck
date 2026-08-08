@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-dunhuang-flying-apsaras",
+  "name": "敦煌飞天藻井",
+  "nameEn": "Dunhuang Flying Apsaras",
+  "names": {
+    "zh-CN": "敦煌飞天藻井",
+    "zh-TW": "敦煌飛天藻井",
+    "en-US": "Dunhuang Flying Apsaras",
+    "ja-JP": "敦煌飛天天井画",
+    "ko-KR": "둔황 비천 천장화",
+    "es-ES": "Apsaras Voladores de Dunhuang",
+    "pt-BR": "Apsaras Voadores de Dunhuang",
+    "ar-SA": "الأبسارا الطائفة في دونهوانغ",
+    "fr-FR": "Apsaras Volantes de Dunhuang",
+    "de-DE": "Dunhuang-Fliegende Apsaras"
+  },
+  "image": "background.png",
+  "appearance": "dark",
+  "region": "cn",
+  "art": {
+    "focusX": 0.73,
+    "focusY": 0.4,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#1c1208",
+    "panel": "rgba(28,18,8,.78)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#e0a93b",
+    "accentAlt": "#e0a93b",
+    "secondary": "#e0a93b",
+    "highlight": "#e0a93b",
+    "text": "#f3e3c4",
+    "muted": "#b89a6a",
+    "line": "rgba(224,169,59,.32)"
+  }
+}

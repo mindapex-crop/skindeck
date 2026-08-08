@@ -1,11 +1,21 @@
-import { app, BrowserWindow, ipcMain, Tray, Menu, screen, shell } from 'electron';
+import { app, BrowserWindow, ipcMain, Tray, Menu, screen, shell, nativeImage } from 'electron';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadAllPets, type LoadedPet } from '@skins/pet-engine';
+import { setLanguage, getLocale, detectSystemLanguage } from '@skins/shared';
+import type { I18nStrings } from '@skins/shared';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const PETS_DIR = path.resolve(__dirname, '../../pets');
+function i18n(): I18nStrings {
+  return getLocale();
+}
+
+function initLanguage() {
+  setLanguage(detectSystemLanguage());
+}
+
+const PETS_DIR = path.resolve(__dirname, '../../../pets');
 
 let petWindow: BrowserWindow | null = null;
 let tray: Tray | null = null;
@@ -32,9 +42,10 @@ function createPetWindow() {
     resizable: false,
     hasShadow: false,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, 'preload.cjs'),
       contextIsolation: true,
       nodeIntegration: false,
+      sandbox: false,
     },
   });
 
@@ -50,11 +61,13 @@ function createPetWindow() {
 
 function createTray() {
   if (!tray) {
-    tray = new Tray(
-      // 用空图标先占位，实际可以换成 pet 缩略图
-      require('electron').nativeImage.createEmpty()
-    );
-    tray.setToolTip('Desktop Pet - 桌宠');
+    const iconPath = path.resolve(__dirname, '../assets/tray.png');
+    const icon = nativeImage.createFromPath(iconPath);
+    const trayIcon = icon.isEmpty()
+      ? nativeImage.createEmpty()
+      : icon.resize({ width: 16, height: 16 });
+    tray = new Tray(trayIcon);
+    tray.setToolTip(i18n().desktopPet);
   }
   rebuildTrayMenu();
 }
@@ -76,18 +89,18 @@ async function rebuildTrayMenu() {
   }));
 
   const menu = Menu.buildFromTemplate([
-    { label: '桌宠', enabled: false },
+    { label: i18n().desktopPet, enabled: false },
     { type: 'separator' },
-    { label: '选择桌宠', submenu: petItems },
+    { label: i18n().selectPet, submenu: petItems },
     {
-      label: '显示/隐藏',
+      label: i18n().togglePet,
       click: () => {
         if (petWindow?.isVisible()) petWindow.hide();
         else petWindow?.show();
       },
     },
     {
-      label: '重置位置',
+      label: i18n().resetPosition,
       click: () => {
         const { workArea } = screen.getPrimaryDisplay();
         petWindow?.setPosition(
@@ -98,10 +111,10 @@ async function rebuildTrayMenu() {
     },
     { type: 'separator' },
     {
-      label: '在 Finder 中打开桌宠目录',
+      label: i18n().openPetFolder,
       click: () => shell.openPath(PETS_DIR),
     },
-    { label: '退出', role: 'quit' },
+    { label: i18n().quit, role: 'quit' },
   ]);
 
   tray.setContextMenu(menu);
@@ -142,6 +155,7 @@ ipcMain.on('pet:move-by', (_e, dx: number, dy: number) => {
 app.whenReady().then(async () => {
   if (process.platform === 'darwin') app.dock.hide();
 
+  initLanguage();
   pets = await loadAllPets(PETS_DIR);
   createPetWindow();
   createTray();

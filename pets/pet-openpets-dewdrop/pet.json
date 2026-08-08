@@ -1,0 +1,7 @@
+{
+  "id": "dewdrop",
+  "displayName": "Dewdrop",
+  "description": "A green slime sprout pet with a cheerful face.",
+  "spritesheetPath": "spritesheet.webp",
+  "category": "western"
+}

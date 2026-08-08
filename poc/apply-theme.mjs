@@ -80,6 +80,16 @@ function buildCss(theme, imgUrl, target) {
   const textLight = colors.text || '#333';
   const textDark = colors.muted || '#aaa';
 
+  // 为 Cursor 生成低透明度版本的面板色 (保持色调, 降低不透明度)
+  function adjustAlpha(rgbaStr, newAlpha) {
+    const m = rgbaStr.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+    if (!m) return rgbaStr;
+    const r = m[1], g = m[2], b = m[3];
+    return `rgba(${r}, ${g}, ${b}, ${newAlpha})`;
+  }
+  const cursorPanelBg = adjustAlpha(panelBg, 0.35);
+  const cursorPanelBgDark = adjustAlpha(panelBgDark, 0.4);
+
   // 公共: 顶部横幅 + VS Code 兼容变量覆盖 (WorkBuddy/Cursor 都吃 vscode-* 变量)
   const common = `
 /* 覆盖 VS Code 兼容层的关键颜色变量, 让原生控件拾取主题配色 */
@@ -191,12 +201,15 @@ html.skins-theme-applied #root > .teams-container .teams-content-wrapper {
     //   body > .monaco-workbench > .part.background / .part.activitybar / .part.sidebar / .part.editor / .part.statusbar / .part.panel
     // .part.background 默认是纯色背景层, 把它换成背景图.
     // .monaco-workbench 整体加半透明遮罩, 各 .part 保留自己的底色 (会半透叠加).
+    //
+    // 注意: Cursor 的 Agents 界面是 Glass UI (glass-* 类名), 不是标准 .monaco-workbench 结构
+    // 这种情况下直接给 body 加背景图 + 给最外层容器加半透明效果
     body = `
 /* ===== skins theme: ${theme.id} (target=vscode-fork) ===== */
 
-/* body 透明 */
+/* body 背景色透明 (不影响 background-image) */
 html.skins-theme-applied body {
-  background: transparent !important;
+  background-color: transparent !important;
 }
 
 /* .part.background 是 VS Code 的官方背景层, 直接换成主题图 */
@@ -251,6 +264,53 @@ html.skins-theme-applied body.dark .monaco-workbench::before {
 html.skins-theme-applied body.vscode-dark .monaco-workbench > .part,
 html.skins-theme-applied body.dark .monaco-workbench > .part {
   background-color: ${panelBgDark} !important;
+}
+
+/* ===== Cursor Agents (Glass UI) 特殊适配 ===== */
+/* Cursor 的 Agents 界面用 glass-* 类名的 Glass UI, 不是标准 VS Code 结构
+   最底层背景层: depth=2, 有 glass-10l6tqk glass-13vifvy glass-u96u03 类
+   侧边栏: glass-sidebar-docked
+   主内容区: 右侧 glass-5yr21d 等
+   
+   策略: 
+   1. 最底层只放背景图, 背景色完全透明, 让图完全显示
+   2. 侧边栏和主内容区用半透明 + 毛玻璃, 让背景图透出同时保持可读
+   3. 透明度降到 0.35-0.45, 保证背景图可见 */
+
+/* 最底层背景层 - 只放背景图 */
+html.skins-theme-applied div[class*="glass-10l6tqk"][class*="glass-13vifvy"] {
+  background-image: url('${imgUrl}') !important;
+  background-size: cover !important;
+  background-position: ${posX} ${posY} !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+  background-color: transparent !important;
+}
+
+/* 侧边栏 - 半透明主题色 + 毛玻璃 */
+html.skins-theme-applied .glass-sidebar-docked {
+  background-color: ${cursorPanelBg} !important;
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+}
+
+/* 主内容区 - 半透明主题色 + 毛玻璃 */
+html.skins-theme-applied div[class*="glass-5yr21d"] {
+  background-color: ${cursorPanelBg} !important;
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+}
+
+/* dark 模式 */
+html.skins-theme-applied body.cursor-dark .glass-sidebar-docked,
+html.skins-theme-applied body.vs-dark .glass-sidebar-docked,
+html.skins-theme-applied body.dark .glass-sidebar-docked {
+  background-color: ${cursorPanelBgDark} !important;
+}
+html.skins-theme-applied body.cursor-dark div[class*="glass-5yr21d"],
+html.skins-theme-applied body.vs-dark div[class*="glass-5yr21d"],
+html.skins-theme-applied body.dark div[class*="glass-5yr21d"] {
+  background-color: ${cursorPanelBgDark} !important;
 }
 `;
   } else {

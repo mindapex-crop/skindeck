@@ -1,0 +1,7 @@
+{
+  "id": "snail-mail",
+  "displayName": "Snail Mail",
+  "description": "A cheerful mail snail with a satchel and spiral shell.",
+  "spritesheetPath": "spritesheet.webp",
+  "category": "western"
+}

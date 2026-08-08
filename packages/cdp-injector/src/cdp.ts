@@ -1,4 +1,5 @@
 import http from 'node:http';
+import { WebSocket } from 'ws';
 
 export interface CdpTarget {
   id: string;
@@ -57,7 +58,7 @@ export async function evaluate(
       reject(new Error('CDP evaluate 超时'));
     }, timeoutMs);
 
-    ws.addEventListener('open', () => {
+    ws.on('open', () => {
       ws.send(
         JSON.stringify({
           id: 1,
@@ -67,10 +68,10 @@ export async function evaluate(
       );
     });
 
-    ws.addEventListener('message', (ev) => {
+    ws.on('message', (data) => {
       clearTimeout(timeout);
       try {
-        const msg = JSON.parse((ev as MessageEvent).data);
+        const msg = JSON.parse(data.toString());
         if (msg.id === 1) {
           if (msg.result?.exceptionDetails) {
             reject(new Error('JS 异常: ' + JSON.stringify(msg.result.exceptionDetails)));
@@ -83,9 +84,9 @@ export async function evaluate(
       }
     });
 
-    ws.addEventListener('error', (e) => {
+    ws.on('error', (e) => {
       clearTimeout(timeout);
-      reject(new Error('WebSocket 错误: ' + (e as Event).type));
+      reject(new Error('WebSocket 错误: ' + e.message));
     });
   });
 }

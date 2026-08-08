@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-nordic-aurora",
+  "name": "北欧极光",
+  "nameEn": "Nordic Aurora",
+  "names": {
+    "zh-CN": "北欧极光",
+    "zh-TW": "北歐極光",
+    "en-US": "Nordic Aurora",
+    "ja-JP": "北欧オーロラ",
+    "ko-KR": "북유럽 오로라",
+    "es-ES": "Aurora Nórdica",
+    "pt-BR": "Aurora Nórdica",
+    "ar-SA": "الشفق القطبي الشمالي",
+    "fr-FR": "Aurore Boréale",
+    "de-DE": "Nordlicht"
+  },
+  "image": "background.png",
+  "appearance": "dark",
+  "region": "eu",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.35,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#08101a",
+    "panel": "rgba(8,16,26,.78)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#4fe0a8",
+    "accentAlt": "#4fe0a8",
+    "secondary": "#4fe0a8",
+    "highlight": "#4fe0a8",
+    "text": "#eaf6f0",
+    "muted": "#8fb6ac",
+    "line": "rgba(79,224,168,.32)"
+  }
+}

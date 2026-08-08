@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-burj-khalifa-night",
+  "name": "哈利法塔夜",
+  "nameEn": "Burj Khalifa Night",
+  "names": {
+    "zh-CN": "哈利法塔夜",
+    "zh-TW": "哈利法塔夜",
+    "en-US": "Burj Khalifa Night",
+    "ja-JP": "ブルジュ・ハリファの夜",
+    "ko-KR": "부르즈 할리파의 밤",
+    "es-ES": "Burj Khalifa de Noche",
+    "pt-BR": "Burj Khalifa à Noite",
+    "ar-SA": "برج خليفة ليلًا",
+    "fr-FR": "Burj Khalifa la Nuit",
+    "de-DE": "Burj Khalifa bei Nacht"
+  },
+  "image": "background.png",
+  "appearance": "dark",
+  "region": "me",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.35,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#0a0e1a",
+    "panel": "rgba(10,14,26,.78)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#e8c24b",
+    "accentAlt": "#e8c24b",
+    "secondary": "#e8c24b",
+    "highlight": "#e8c24b",
+    "text": "#eaeefb",
+    "muted": "#9aa3c8",
+    "line": "rgba(232,194,75,.32)"
+  }
+}

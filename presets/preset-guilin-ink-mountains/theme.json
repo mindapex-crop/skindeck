@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-guilin-ink-mountains",
+  "name": "桂林水墨远山",
+  "nameEn": "Guilin Ink Mountains",
+  "names": {
+    "zh-CN": "桂林水墨远山",
+    "zh-TW": "桂林水墨遠山",
+    "en-US": "Guilin Ink Mountains",
+    "ja-JP": "桂林の墨山水",
+    "ko-KR": "구이린 먹산수",
+    "es-ES": "Montañas de Tinta de Guilin",
+    "pt-BR": "Montanhas de Tinta de Guilin",
+    "ar-SA": "جبال غويلين الحبرية",
+    "fr-FR": "Montagnes d'Encre de Guilin",
+    "de-DE": "Guilin-Tuschgebirge"
+  },
+  "image": "background.png",
+  "appearance": "light",
+  "region": "cn",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.45,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#f4f1ea",
+    "panel": "rgba(255,255,255,.6)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#6b8e9e",
+    "accentAlt": "#6b8e9e",
+    "secondary": "#6b8e9e",
+    "highlight": "#6b8e9e",
+    "text": "#2b2b2b",
+    "muted": "#7a766c",
+    "line": "rgba(107,142,158,.3)"
+  }
+}

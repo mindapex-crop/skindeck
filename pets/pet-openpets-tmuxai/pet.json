@@ -1,0 +1,8 @@
+{
+  "id": "tmuxai",
+  "displayName": "TmuxAI Official",
+  "description": "Official TmuxAI mascot — a floating rounded white cube robot with antenna. Learn more at https://tmuxai.dev",
+  "spritesheetPath": "spritesheet.webp",
+  "sourceUrl": "https://tmuxai.dev",
+  "category": "western"
+}

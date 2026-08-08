@@ -1,0 +1,39 @@
+{
+  "name": "@skins/unified",
+  "version": "0.1.0",
+  "private": true,
+  "productName": "SkinDeck",
+  "type": "module",
+  "main": "dist/bundle.cjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mindapex-crop/skindeck.git"
+  },
+  "scripts": {
+    "build": "vite build && cp src/pet-preload.cjs dist/pet-preload.cjs && esbuild src/main.ts --bundle --platform=node --format=cjs --outfile=dist/bundle.cjs --external:electron",
+    "start": "electron dist/bundle.cjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@skins/shared": "workspace:*",
+    "@skins/skin-manager": "workspace:*",
+    "@skins/pet-engine": "workspace:*",
+    "@skins/target-workbuddy": "workspace:*",
+    "@skins/target-cursor": "workspace:*",
+    "@skins/target-trae-work": "workspace:*",
+    "@skins/target-claude-desktop": "workspace:*",
+    "@skins/target-vscode": "workspace:*",
+    "@skins/target-windsruff": "workspace:*",
+    "@skins/target-zcode": "workspace:*",
+    "@skins/target-codex": "workspace:*",
+    "@skins/target-qoderwork": "workspace:*",
+    "@skins/target-trae-solo": "workspace:*"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "vite": "^5.4.0",
+    "typescript": "^5.6.0",
+    "esbuild": "^0.28.1",
+    "@types/node": "^22.0.0"
+  }
+}

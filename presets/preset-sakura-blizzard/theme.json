@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-sakura-blizzard",
+  "name": "樱花吹雪",
+  "nameEn": "Sakura Blizzard",
+  "names": {
+    "zh-CN": "樱花吹雪",
+    "zh-TW": "樱花吹雪",
+    "en-US": "Sakura Blizzard",
+    "ja-JP": "桜吹雪",
+    "ko-KR": "벚꽃 나부락",
+    "es-ES": "Ventisca de Sakura",
+    "pt-BR": "Ventania de Sakura",
+    "ar-SA": "عاصفة الساكورا الثلجية",
+    "fr-FR": "Tempête de Sakura",
+    "de-DE": "Sakura-Schneesturm"
+  },
+  "image": "background.png",
+  "appearance": "light",
+  "region": "jp-kr",
+  "art": {
+    "focusX": 0.73,
+    "focusY": 0.4,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#fdeef3",
+    "panel": "rgba(255,255,255,.66)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#e98aa8",
+    "accentAlt": "#e98aa8",
+    "secondary": "#e98aa8",
+    "highlight": "#e98aa8",
+    "text": "#3a2b30",
+    "muted": "#b58a98",
+    "line": "rgba(233,138,168,.32)"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-seoul-han-river-night",
+  "name": "首尔汉江夜",
+  "nameEn": "Seoul Han River Night",
+  "names": {
+    "zh-CN": "首尔汉江夜",
+    "zh-TW": "首爾漢江夜",
+    "en-US": "Seoul Han River Night",
+    "ja-JP": "ソウル漢江の夜",
+    "ko-KR": "서울 한강의 밤",
+    "es-ES": "Noche del Río Han en Seúl",
+    "pt-BR": "Noite do Rio Han em Seul",
+    "ar-SA": "ليل نهر هان في سيول",
+    "fr-FR": "Nuit de la Rivière Han à Séoul",
+    "de-DE": "Seoul-Han-Fluss Nacht"
+  },
+  "image": "background.png",
+  "appearance": "dark",
+  "region": "jp-kr",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.45,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#0a0e1a",
+    "panel": "rgba(10,14,26,.78)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#b565ff",
+    "accentAlt": "#b565ff",
+    "secondary": "#b565ff",
+    "highlight": "#b565ff",
+    "text": "#eaeaff",
+    "muted": "#9a93c8",
+    "line": "rgba(181,101,255,.34)"
+  }
+}

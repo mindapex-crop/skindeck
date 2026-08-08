@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-bali-rice-terraces",
+  "name": "巴厘梯田",
+  "nameEn": "Bali Rice Terraces",
+  "names": {
+    "zh-CN": "巴厘梯田",
+    "zh-TW": "巴厘梯田",
+    "en-US": "Bali Rice Terraces",
+    "ja-JP": "バリの棚田",
+    "ko-KR": "발리 계단식 논",
+    "es-ES": "Arrozales de Bali",
+    "pt-BR": "Terraços de Arroz de Bali",
+    "ar-SA": "مدرجات الأرز في بالي",
+    "fr-FR": "Rizières de Bali",
+    "de-DE": "Bali-Reisterrassen"
+  },
+  "image": "background.png",
+  "appearance": "dark",
+  "region": "sea",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.5,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#0e1a12",
+    "panel": "rgba(14,26,18,.76)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#5aa86a",
+    "accentAlt": "#5aa86a",
+    "secondary": "#5aa86a",
+    "highlight": "#5aa86a",
+    "text": "#e0f0e4",
+    "muted": "#88b098",
+    "line": "rgba(90,168,106,.32)"
+  }
+}

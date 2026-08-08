@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-four-gentlemen-ink",
+  "name": "四君子·梅兰竹菊",
+  "nameEn": "Four Gentlemen Ink",
+  "names": {
+    "zh-CN": "四君子·梅兰竹菊",
+    "zh-TW": "四君子·梅蘭竹菊",
+    "en-US": "Four Gentlemen Ink",
+    "ja-JP": "四君子・梅蘭竹菊",
+    "ko-KR": "사군자·매란죽국",
+    "es-ES": "Tinta de los Cuatro Caballeros",
+    "pt-BR": "Tinta dos Quatro Cavalheiros",
+    "ar-SA": "حبر السادة الأربعة",
+    "fr-FR": "Encre des Quatre Gentilshommes",
+    "de-DE": "Tinte der Vier Edlen"
+  },
+  "image": "background.png",
+  "appearance": "light",
+  "region": "cn",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.5,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#f0ece2",
+    "panel": "rgba(255,255,255,.62)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#5a6b5c",
+    "accentAlt": "#5a6b5c",
+    "secondary": "#5a6b5c",
+    "highlight": "#5a6b5c",
+    "text": "#2b2b2b",
+    "muted": "#7a766c",
+    "line": "rgba(90,107,92,.3)"
+  }
+}

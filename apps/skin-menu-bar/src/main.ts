@@ -7,11 +7,20 @@ import workbuddyConfig from '@skins/target-workbuddy';
 import cursorConfig from '@skins/target-cursor';
 import traeWorkConfig from '@skins/target-trae-work';
 import claudeDesktopConfig from '@skins/target-claude-desktop';
-import type { TargetConfig } from '@skins/shared';
+import type { TargetConfig, I18nStrings } from '@skins/shared';
+import { setLanguage, getLocale, detectSystemLanguage } from '@skins/shared';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const PRESETS_DIR = path.resolve(__dirname, '../../presets');
+function i18n(): I18nStrings {
+  return getLocale();
+}
+
+function initLanguage() {
+  setLanguage(detectSystemLanguage());
+}
+
+const PRESETS_DIR = path.resolve(__dirname, '../../../presets');
 
 const TARGETS: TargetConfig[] = [
   workbuddyConfig,
@@ -45,7 +54,7 @@ async function rebuildMenu() {
         rebuildMenu();
       } catch (e) {
         dialog.showErrorBox(
-          '应用皮肤失败',
+          i18n().applySkinFailed,
           `无法应用「${p.theme.name}」到 ${target.name}：\n${(e as Error).message}`,
         );
       }
@@ -63,39 +72,39 @@ async function rebuildMenu() {
   }));
 
   const template: MenuItemConstructorOptions[] = [
-    { label: 'Skins Menu Bar', enabled: false },
+    { label: i18n().appName, enabled: false },
     { type: 'separator' },
-    { label: '目标应用', submenu: targetItems },
+    { label: i18n().targetApp, submenu: targetItems },
     { type: 'separator' },
-    { label: '选择皮肤', submenu: themeItems },
+    { label: i18n().selectSkin, submenu: themeItems },
     {
-      label: '恢复默认',
+      label: i18n().restoreDefault,
       click: async () => {
         try {
           await skinManager!.restore(target);
           rebuildMenu();
         } catch (e) {
           dialog.showErrorBox(
-            '恢复失败',
+            i18n().restoreFailed,
             `无法恢复 ${target.name}：\n${(e as Error).message}`,
           );
         }
       },
     },
     { type: 'separator' },
-    { label: `当前: ${target.name}`, enabled: false },
+    { label: `${i18n().current}: ${target.name}`, enabled: false },
     {
       label: currentTheme
-        ? `皮肤: ${currentTheme.theme.name}`
-        : '皮肤: 默认',
+        ? `${i18n().skin}: ${currentTheme.theme.name}`
+        : `${i18n().skin}: -`,
       enabled: false,
     },
     { type: 'separator' },
     {
-      label: '在 Finder 中打开预设',
+      label: i18n().openSkinFolder,
       click: () => shell.openPath(PRESETS_DIR),
     },
-    { label: '退出', role: 'quit' },
+    { label: i18n().quit, role: 'quit' },
   ];
 
   const menu = Menu.buildFromTemplate(template);
@@ -103,14 +112,19 @@ async function rebuildMenu() {
 }
 
 function createTrayIcon() {
-  const icon = nativeImage.createEmpty();
-  tray = new Tray(icon);
-  tray.setToolTip('Skins - 主题皮肤管理器');
+  const iconPath = path.resolve(__dirname, '../assets/tray.png');
+  const icon = nativeImage.createFromPath(iconPath);
+  const trayIcon = icon.isEmpty()
+    ? nativeImage.createEmpty()
+    : icon.resize({ width: 16, height: 16 });
+  tray = new Tray(trayIcon);
+  tray.setToolTip(i18n().appName);
 }
 
 app.whenReady().then(async () => {
   if (process.platform === 'darwin') app.dock.hide();
 
+  initLanguage();
   createTrayIcon();
   skinManager = new SkinManager(PRESETS_DIR);
 

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-santorini-blue-white",
+  "name": "圣托里尼蓝白",
+  "nameEn": "Santorini Blue-White",
+  "names": {
+    "zh-CN": "圣托里尼蓝白",
+    "zh-TW": "聖托里尼藍白",
+    "en-US": "Santorini Blue-White",
+    "ja-JP": "サントリーニ青と白",
+    "ko-KR": "산토리니 블루 화이트",
+    "es-ES": "Santorini Azul y Blanco",
+    "pt-BR": "Santorini Azul e Branco",
+    "ar-SA": "سانتوريني الأزرق والأبيض",
+    "fr-FR": "Santorini Bleu et Blanc",
+    "de-DE": "Santorini Blau-Weiß"
+  },
+  "image": "background.png",
+  "appearance": "light",
+  "region": "eu",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.45,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#e8f0f8",
+    "panel": "rgba(255,255,255,.62)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#2a7ab8",
+    "accentAlt": "#2a7ab8",
+    "secondary": "#2a7ab8",
+    "highlight": "#2a7ab8",
+    "text": "#2b2b2b",
+    "muted": "#7a8a9a",
+    "line": "rgba(42,122,184,.3)"
+  }
+}

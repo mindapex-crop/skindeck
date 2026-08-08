@@ -23,7 +23,8 @@ const testTheme: Theme = {
 const testImgUrl = 'file:///tmp/test.jpg';
 
 test('buildThemeCss: workbuddy target 包含 .teams-container 相关样式', () => {
-  const css = buildThemeCss(testTheme, testImgUrl, 'workbuddy');
+  // focus 仅对 cover 模式生效（repeat/contain 会覆盖 bgPosition），故显式指定 cover
+  const css = buildThemeCss(testTheme, testImgUrl, 'workbuddy', { backgroundMode: 'cover' });
   assert.ok(css.includes('#root > .teams-container'), '应包含 .teams-container 选择器');
   assert.ok(css.includes('gridViewItem_'), '应包含 gridViewItem_ 哈希布局透明化');
   assert.ok(css.includes('backdrop-filter: blur(16px)'), '应有 backdrop-filter 模糊');
@@ -54,7 +55,7 @@ test('buildThemeCss: 所有 target 都包含 VS Code 变量覆盖', () => {
 
 test('buildThemeCss: focus 位置正确计算', () => {
   const theme: Theme = { ...testTheme, art: { focusX: 0.76, focusY: 0.45 } };
-  const css = buildThemeCss(theme, testImgUrl, 'workbuddy');
+  const css = buildThemeCss(theme, testImgUrl, 'workbuddy', { backgroundMode: 'cover' });
   assert.ok(css.includes('76.00%'), 'focusX 0.76 -> 76%');
   assert.ok(css.includes('45.00%'), 'focusY 0.45 -> 45%');
 });

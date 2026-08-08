@@ -1,0 +1,7 @@
+{
+  "id": "bulwark",
+  "displayName": "Bulwark",
+  "description": "A stout bulldog knight with a star shield and tiny armor.",
+  "spritesheetPath": "spritesheet.webp",
+  "category": "western"
+}

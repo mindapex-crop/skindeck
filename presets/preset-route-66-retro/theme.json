@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-route-66-retro",
+  "name": "66号公路",
+  "nameEn": "Route 66 Retro",
+  "names": {
+    "zh-CN": "66号公路",
+    "zh-TW": "66號公路",
+    "en-US": "Route 66 Retro",
+    "ja-JP": "ルート66レトロ",
+    "ko-KR": "루트 66 레트로",
+    "es-ES": "Ruta 66 Retro",
+    "pt-BR": "Rota 66 Retrô",
+    "ar-SA": "الطريق 66 بأسلوب رجعي",
+    "fr-FR": "Route 66 Rétro",
+    "de-DE": "Route 66 Retro"
+  },
+  "image": "background.png",
+  "appearance": "dark",
+  "region": "eu",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.55,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#1e120a",
+    "panel": "rgba(30,18,10,.74)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#e0622e",
+    "accentAlt": "#e0622e",
+    "secondary": "#e0622e",
+    "highlight": "#e0622e",
+    "text": "#f5e3d0",
+    "muted": "#c29472",
+    "line": "rgba(224,98,46,.32)"
+  }
+}

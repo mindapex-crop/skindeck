@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-nyc-skyline-dusk",
+  "name": "纽约天际线",
+  "nameEn": "NYC Skyline Dusk",
+  "names": {
+    "zh-CN": "纽约天际线",
+    "zh-TW": "紐約天際線",
+    "en-US": "NYC Skyline Dusk",
+    "ja-JP": "ニューヨークの夕暮れスカイライン",
+    "ko-KR": "뉴욕 스카이라인 황혼",
+    "es-ES": "Horizonte de NYC al Anochecer",
+    "pt-BR": "Horizonte de NYC no Anoitecer",
+    "ar-SA": "أفق نيويورك عند الغسق",
+    "fr-FR": "Skyline de NYC au Crépuscule",
+    "de-DE": "NYC-Skyline in der Dämmerung"
+  },
+  "image": "background.png",
+  "appearance": "dark",
+  "region": "eu",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.45,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#0a1020",
+    "panel": "rgba(10,16,32,.78)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#e8b84b",
+    "accentAlt": "#e8b84b",
+    "secondary": "#e8b84b",
+    "highlight": "#e8b84b",
+    "text": "#eaeefb",
+    "muted": "#9aa3c8",
+    "line": "rgba(232,184,75,.32)"
+  }
+}

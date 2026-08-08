@@ -1,0 +1,7 @@
+{
+  "id": "ribbit-scout",
+  "displayName": "Ribbit Scout",
+  "description": "A green frog adventurer with purple headband, red scarf, and staff.",
+  "spritesheetPath": "spritesheet.webp",
+  "category": "western"
+}

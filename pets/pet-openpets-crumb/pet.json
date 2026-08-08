@@ -1,0 +1,7 @@
+{
+  "id": "crumb",
+  "displayName": "Crumb",
+  "description": "A tiny smiling toast cube with a pat of butter.",
+  "spritesheetPath": "spritesheet.webp",
+  "category": "western"
+}

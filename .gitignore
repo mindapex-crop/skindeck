@@ -4,3 +4,6 @@ dist
 *.log
 .turbo
 .pnpm-store
+.workbuddy/
+*.timestamp-*.mjs
+skindeck-update.zip

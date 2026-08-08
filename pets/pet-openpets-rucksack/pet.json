@@ -1,0 +1,7 @@
+{
+  "id": "rucksack",
+  "displayName": "Rucksack",
+  "description": "A masked raccoon traveler with a red scarf and bindle sack.",
+  "spritesheetPath": "spritesheet.webp",
+  "category": "western"
+}

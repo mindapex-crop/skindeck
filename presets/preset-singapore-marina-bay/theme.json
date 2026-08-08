@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-singapore-marina-bay",
+  "name": "新加坡滨海湾",
+  "nameEn": "Singapore Marina Bay",
+  "names": {
+    "zh-CN": "新加坡滨海湾",
+    "zh-TW": "新加坡濱海灣",
+    "en-US": "Singapore Marina Bay",
+    "ja-JP": "シンガポール・マリーナベイ",
+    "ko-KR": "싱가포르 마리나 베이",
+    "es-ES": "Marina Bay de Singapur",
+    "pt-BR": "Marina Bay de Singapura",
+    "ar-SA": "مارينا باي سنغافورة",
+    "fr-FR": "Marina Bay de Singapour",
+    "de-DE": "Singapore Marina Bay"
+  },
+  "image": "background.png",
+  "appearance": "dark",
+  "region": "sea",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.45,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#0a0e1a",
+    "panel": "rgba(10,14,26,.78)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#7a5cff",
+    "accentAlt": "#7a5cff",
+    "secondary": "#7a5cff",
+    "highlight": "#7a5cff",
+    "text": "#eaeaff",
+    "muted": "#9a93c8",
+    "line": "rgba(122,92,255,.34)"
+  }
+}

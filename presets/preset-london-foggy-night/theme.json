@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-london-foggy-night",
+  "name": "伦敦雾夜",
+  "nameEn": "London Foggy Night",
+  "names": {
+    "zh-CN": "伦敦雾夜",
+    "zh-TW": "倫敦霧夜",
+    "en-US": "London Foggy Night",
+    "ja-JP": "ロンドンの霧の夜",
+    "ko-KR": "런던 안개 밤",
+    "es-ES": "Noche Brumosa de Londres",
+    "pt-BR": "Noite Nebulosa de Londres",
+    "ar-SA": "ليل لندن الضبابي",
+    "fr-FR": "Nuit Brumeuse de Londres",
+    "de-DE": "Londoner Nebelnacht"
+  },
+  "image": "background.png",
+  "appearance": "dark",
+  "region": "eu",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.45,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#14161a",
+    "panel": "rgba(20,22,26,.76)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#d4a85a",
+    "accentAlt": "#d4a85a",
+    "secondary": "#d4a85a",
+    "highlight": "#d4a85a",
+    "text": "#e8e4dc",
+    "muted": "#9a9284",
+    "line": "rgba(212,168,90,.32)"
+  }
+}

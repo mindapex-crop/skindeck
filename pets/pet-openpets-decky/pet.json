@@ -1,0 +1,6 @@
+{
+  "id": "decky",
+  "displayName": "Decky",
+  "description": "A skateboard Codex pet whose deck graphic changes by state.",
+  "spritesheetPath": "spritesheet.webp"
+}

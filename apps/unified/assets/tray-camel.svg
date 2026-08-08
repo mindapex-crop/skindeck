@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44" height="44">
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F8CB73"/>
+      <stop offset="1" stop-color="#E2A24D"/>
+    </linearGradient>
+    <linearGradient id="hump" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FBDD92"/>
+      <stop offset="1" stop-color="#EFA94E"/>
+    </linearGradient>
+  </defs>
+  <!-- 等比缩到 0.68 居中 (更贴合菜单栏图标的视觉重量，像微信/Codex 的字形填满按钮) -->
+  <g transform="translate(6, 6) scale(0.68)">
+    <!-- legs -->
+    <g fill="#D99640">
+      <rect x="17" y="33" width="4.2" height="10" rx="2"/>
+      <rect x="23" y="34" width="4.2" height="9" rx="2"/>
+      <rect x="30" y="34" width="4.2" height="9" rx="2"/>
+      <rect x="35" y="33" width="4.2" height="10" rx="2"/>
+    </g>
+    <!-- tail -->
+    <path d="M39.5 30 q4 3 1.5 9" stroke="#D99640" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+    <!-- body -->
+    <ellipse cx="27" cy="29" rx="12.5" ry="9.5" fill="url(#body)"/>
+    <!-- hump -->
+    <path d="M16 23 Q27 5 38 23 Z" fill="url(#hump)"/>
+    <!-- neck -->
+    <path d="M12 18 L18 18 L23 30 L17 31 Z" fill="url(#body)"/>
+    <!-- head -->
+    <ellipse cx="13" cy="12.8" rx="7.2" ry="6.6" fill="url(#body)"/>
+    <!-- snout -->
+    <ellipse cx="7.2" cy="15.2" rx="4" ry="3.2" fill="#F0B45C"/>
+    <!-- ears -->
+    <ellipse cx="11" cy="6.1" rx="1.8" ry="2.8" fill="#E2A24D" transform="rotate(-18 11 6.1)"/>
+    <ellipse cx="16.5" cy="6.1" rx="1.8" ry="2.8" fill="#E2A24D" transform="rotate(18 16.5 6.1)"/>
+    <!-- eye -->
+    <circle cx="13.2" cy="11.6" r="2.1" fill="#3A2A1A"/>
+    <circle cx="14" cy="10.7" r="0.7" fill="#fff"/>
+    <!-- cheek -->
+    <circle cx="9.2" cy="15" r="1.7" fill="#F69A92" opacity="0.65"/>
+    <!-- smile -->
+    <path d="M4.8 16.4 q2.2 2 4.6 0.4" stroke="#3A2A1A" stroke-width="1" fill="none" stroke-linecap="round"/>
+    <!-- nostril -->
+    <circle cx="5.2" cy="14.6" r="0.55" fill="#3A2A1A" opacity="0.5"/>
+  </g>
+</svg>

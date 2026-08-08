@@ -1,0 +1,9 @@
+{
+  "id": "indian-cto",
+  "displayName": "Indian CTO",
+  "description": "A pixel-art desktop companion made from a real photo — glasses, beard, and a blue WILD tee.",
+  "spritesheetPath": "spritesheet.webp",
+  "category": "western",
+  "subcategory": "tech",
+  "sourceUrl": "https://github.com/alvinunreal/openpets/issues/83"
+}

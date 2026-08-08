@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-angkor-wat-dawn",
+  "name": "吴哥窟晨雾",
+  "nameEn": "Angkor Wat Dawn",
+  "names": {
+    "zh-CN": "吴哥窟晨雾",
+    "zh-TW": "吳哥窟晨霧",
+    "en-US": "Angkor Wat Dawn",
+    "ja-JP": "アンコールワットの朝霧",
+    "ko-KR": "앙코르 와트 새벽 안개",
+    "es-ES": "Angkor Wat al Amanecer",
+    "pt-BR": "Angkor Wat ao Amanhecer",
+    "ar-SA": "أنغكور وات عند الفجر",
+    "fr-FR": "Angkor Wat à l'Aube",
+    "de-DE": "Angkor Wat im Morgengrauen"
+  },
+  "image": "background.png",
+  "appearance": "dark",
+  "region": "sea",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.4,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#1e160c",
+    "panel": "rgba(30,22,12,.74)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#e0a23e",
+    "accentAlt": "#e0a23e",
+    "secondary": "#e0a23e",
+    "highlight": "#e0a23e",
+    "text": "#f5e7cf",
+    "muted": "#c2a06e",
+    "line": "rgba(224,162,62,.32)"
+  }
+}

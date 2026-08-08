@@ -1,0 +1,7 @@
+{
+  "id": "sporecap",
+  "displayName": "Sporecap",
+  "description": "A cozy mushroom pet with a red spotted cap and leafy arms.",
+  "spritesheetPath": "spritesheet.webp",
+  "category": "western"
+}

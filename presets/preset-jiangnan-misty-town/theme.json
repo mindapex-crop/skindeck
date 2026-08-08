@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-jiangnan-misty-town",
+  "name": "江南烟雨",
+  "nameEn": "Jiangnan Misty Town",
+  "names": {
+    "zh-CN": "江南烟雨",
+    "zh-TW": "江南煙雨",
+    "en-US": "Jiangnan Misty Town",
+    "ja-JP": "江南の煙雨",
+    "ko-KR": "강남 연우",
+    "es-ES": "Pueblo Brumoso de Jiangnan",
+    "pt-BR": "Vila Nebulosa de Jiangnan",
+    "ar-SA": "بلدة جيانغنان الضبابية",
+    "fr-FR": "Ville Brumeuse de Jiangnan",
+    "de-DE": "Jiangnan-Nebelstadt"
+  },
+  "image": "background.png",
+  "appearance": "light",
+  "region": "cn",
+  "art": {
+    "focusX": 0.74,
+    "focusY": 0.55,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#e9eef0",
+    "panel": "rgba(255,255,255,.62)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#5b7d8c",
+    "accentAlt": "#5b7d8c",
+    "secondary": "#5b7d8c",
+    "highlight": "#5b7d8c",
+    "text": "#33403f",
+    "muted": "#8597a0",
+    "line": "rgba(91,125,140,.3)"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-dead-sea-sunrise",
+  "name": "死海晨光",
+  "nameEn": "Dead Sea Sunrise",
+  "names": {
+    "zh-CN": "死海晨光",
+    "zh-TW": "死海晨光",
+    "en-US": "Dead Sea Sunrise",
+    "ja-JP": "死海の朝日",
+    "ko-KR": "사해 여명",
+    "es-ES": "Amanecer del Mar Muerto",
+    "pt-BR": "Amanhecer do Mar Morto",
+    "ar-SA": "شروق البحر الميت",
+    "fr-FR": "Lever de Soleil de la Mer Morte",
+    "de-DE": "Totes Meer Sonnenaufgang"
+  },
+  "image": "background.png",
+  "appearance": "light",
+  "region": "me",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.55,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#e8e0d8",
+    "panel": "rgba(255,255,255,.6)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#b88a5a",
+    "accentAlt": "#b88a5a",
+    "secondary": "#b88a5a",
+    "highlight": "#b88a5a",
+    "text": "#3a3028",
+    "muted": "#8a7a6a",
+    "line": "rgba(184,138,90,.3)"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-petra-rose-city",
+  "name": "佩特拉古城",
+  "nameEn": "Petra Rose City",
+  "names": {
+    "zh-CN": "佩特拉古城",
+    "zh-TW": "佩特拉古城",
+    "en-US": "Petra Rose City",
+    "ja-JP": "ペトラの薔薇色の街",
+    "ko-KR": "페트라 장미색 도시",
+    "es-ES": "Petra Ciudad Rosa",
+    "pt-BR": "Petra Cidade Rosada",
+    "ar-SA": "البتراء المدينة الوردية",
+    "fr-FR": "Pétra la Cité Rose",
+    "de-DE": "Petra die Rosarote Stadt"
+  },
+  "image": "background.png",
+  "appearance": "dark",
+  "region": "me",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.45,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#2a1810",
+    "panel": "rgba(42,24,16,.74)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#e08a5a",
+    "accentAlt": "#e08a5a",
+    "secondary": "#e08a5a",
+    "highlight": "#e08a5a",
+    "text": "#f5e0c8",
+    "muted": "#c29472",
+    "line": "rgba(224,138,90,.32)"
+  }
+}

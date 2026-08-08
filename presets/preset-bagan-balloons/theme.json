@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-bagan-balloons",
+  "name": "蒲甘热气球",
+  "nameEn": "Bagan Balloons",
+  "names": {
+    "zh-CN": "蒲甘热气球",
+    "zh-TW": "蒲甘熱氣球",
+    "en-US": "Bagan Balloons",
+    "ja-JP": "バガンの熱気球",
+    "ko-KR": "바간 열기구",
+    "es-ES": "Globos de Bagan",
+    "pt-BR": "Balões de Bagan",
+    "ar-SA": "بالونات باغان",
+    "fr-FR": "Ballons de Bagan",
+    "de-DE": "Bagan-Ballons"
+  },
+  "image": "background.png",
+  "appearance": "dark",
+  "region": "sea",
+  "art": {
+    "focusX": 0.72,
+    "focusY": 0.45,
+    "safeArea": "left",
+    "taskMode": "ambient",
+    "autoFit": false
+  },
+  "colors": {
+    "background": "#1e160c",
+    "panel": "rgba(30,22,12,.74)",
+    "panelAlt": "rgba(20,20,20,0.55)",
+    "accent": "#e08a3e",
+    "accentAlt": "#e08a3e",
+    "secondary": "#e08a3e",
+    "highlight": "#e08a3e",
+    "text": "#f5e7cf",
+    "muted": "#c29a6e",
+    "line": "rgba(224,138,62,.32)"
+  }
+}

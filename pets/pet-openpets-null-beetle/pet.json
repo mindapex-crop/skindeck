@@ -1,0 +1,7 @@
+{
+  "id": "null-beetle",
+  "displayName": "Null Beetle",
+  "description": "A round brass-and-black robot beetle with glowing cyan eyes.",
+  "spritesheetPath": "spritesheet.webp",
+  "category": "western"
+}
