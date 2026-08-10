@@ -3,8 +3,9 @@ import type { MenuItemConstructorOptions } from 'electron';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import fs from 'node:fs/promises';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
-import { SkinManager } from '@skins/skin-manager';
+import { SkinManager, isApplied } from '@skins/skin-manager';
 import type { ApplyOptions } from '@skins/skin-manager';
 import { loadAllPets, type LoadedPet } from '@skins/pet-engine';
 import workbuddyConfig from '@skins/target-workbuddy';
@@ -55,7 +56,7 @@ let skinManager: SkinManager | null = null;
 let currentTargetId: string = cursorConfig.id;
 let currentOpacity: number = 1;
 let customImagePath: string | null = null;
-let currentBackgroundMode: 'cover' | 'repeat' | 'contain' = 'repeat';
+let currentBackgroundMode: 'cover' | 'repeat' | 'contain' = 'cover';
 let currentFontFamily: string = 'follow'; // 'follow' = use active skin's font (or region default); otherwise a CSS font-family stack
 
 let appVersion = '0.1.0';
@@ -67,6 +68,61 @@ const GITHUB_REPO = 'mindapex-crop/skindeck';
 const UPDATE_ASSET_NAME = 'skindeck-update.zip';
 // 项目根目录：apps/unified/dist → 上溯三级
 const PROJECT_ROOT = path.resolve(moduleDir, '../../..');
+
+// ── 状态持久化（记住上次选择的皮肤 / 目标 / 选项，重启后自动重新注入最新代码） ──
+interface PersistedState {
+  themeId: string | null;
+  targetId: string;
+  opacity: number;
+  backgroundMode: 'cover' | 'repeat' | 'contain';
+  fontFamily: string;
+  customImagePath: string | null;
+  /** 状态 schema 版本；低于 2 时做一次向后迁移（旧默认 repeat → cover）。 */
+  schemaVersion?: number;
+}
+
+function stateFilePath(): string {
+  return path.join(app.getPath('userData'), 'skindeck-state.json');
+}
+
+function loadPersistedState(): PersistedState | null {
+  try {
+    const raw = readFileSync(stateFilePath(), 'utf-8');
+    const s = JSON.parse(raw);
+    if (s && typeof s === 'object') {
+      // 向后迁移：v0.1.4 及更早把 backgroundMode 默认写成 repeat（背景图只盖中间、
+      // 不铺满窗口的元凶）。升级到 v0.1.5 时把旧默认 repeat 纠正为 cover。
+      // 用 schemaVersion 保证只迁移一次——用户之后若主动选 repeat 不会被覆盖。
+      if ((s.schemaVersion ?? 1) < 2 && s.backgroundMode === 'repeat') {
+        s.backgroundMode = 'cover';
+      }
+      s.schemaVersion = 2;
+      return s as PersistedState;
+    }
+  } catch {
+    /* 尚无持久化状态 */
+  }
+  return null;
+}
+
+function saveState(): void {
+  if (!skinManager) return;
+  try {
+    const theme = skinManager.getCurrentTheme();
+    const s: PersistedState = {
+      themeId: theme?.theme.id ?? null,
+      targetId: currentTargetId,
+      opacity: currentOpacity,
+      backgroundMode: currentBackgroundMode,
+      fontFamily: currentFontFamily,
+      customImagePath,
+      schemaVersion: 2,
+    };
+    writeFileSync(stateFilePath(), JSON.stringify(s, null, 2));
+  } catch (e) {
+    console.warn('保存 SkinDeck 状态失败:', (e as Error).message);
+  }
+}
 
 let petWindow: BrowserWindow | null = null;
 let pets: LoadedPet[] = [];
@@ -173,6 +229,103 @@ async function probeCdpPort(port: number, timeoutMs = 1500): Promise<boolean> {
   });
 }
 
+// 从 /Applications/Xxx.app 推导 open -a 用的应用展示名（去掉 .app 后缀）
+function appNameFromPath(appPath: string): string {
+  return path.basename(appPath).replace(/\.app$/i, '');
+}
+
+// 通过 bundleId 检测目标 App 是否正在运行（macOS 用 System Events，回退到进程名探测）。
+// 这里只关心"进程在不在"，不关心端口——端口由 probeCdpPort 负责。
+async function isAppRunning(appPath: string, bundleId?: string): Promise<boolean> {
+  const { execFile } = await import('node:child_process');
+  const { promisify } = await import('node:util');
+  const execFileAsync = promisify(execFile);
+
+  if (process.platform === 'darwin' && bundleId) {
+    try {
+      const { stdout } = await execFileAsync('osascript', [
+        '-e',
+        `tell application "System Events" to (exists process whose bundle identifier is "${bundleId}")`,
+      ]);
+      const v = stdout.trim().toLowerCase();
+      if (v === 'true') return true;
+      if (v === 'false') return false;
+    } catch {
+      /* 回退到进程名探测 */
+    }
+  }
+
+  // 回退：用进程路径片段探测（对所有平台通用）
+  try {
+    const name = appNameFromPath(appPath);
+    const { stdout } = await execFileAsync('pgrep', ['-f', `${name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}.app/Contents`]);
+    return stdout.trim().length > 0;
+  } catch {
+    return false;
+  }
+}
+
+// 优雅退出目标 App：优先用 bundleId 发 AppleEvent quit（让 App 有机会保存），
+// 失败则回退到 pkill 强杀。
+async function quitApp(bundleId: string | undefined, appName: string): Promise<void> {
+  const { execFile } = await import('node:child_process');
+  const { promisify } = await import('node:util');
+  const execFileAsync = promisify(execFile);
+
+  if (process.platform === 'darwin' && bundleId) {
+    try {
+      await execFileAsync('osascript', ['-e', `tell application id "${bundleId}" to quit`]);
+      return;
+    } catch {
+      /* 回退 pkill */
+    }
+  }
+  try {
+    await execFileAsync('pkill', ['-f', `${appName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}.app/Contents`]);
+  } catch {
+    /* 进程可能已退出 */
+  }
+}
+
+// 用带调试端口的方式拉起目标 App。macOS 用 open -a <名称> --args，让 LaunchServices
+// 正确透传 --remote-debugging-port（直接调二进制会被某些 IDE 的瘦启动器白名单拦截）。
+async function launchWithDebugPort(target: TargetConfig): Promise<void> {
+  const { execFile } = await import('node:child_process');
+  const { promisify } = await import('node:util');
+  const execFileAsync = promisify(execFile);
+  const appName = appNameFromPath(target.appPath);
+
+  if (process.platform === 'darwin') {
+    try {
+      await execFileAsync('open', [
+        '-a', appName,
+        '--args',
+        `--remote-debugging-port=${target.cdpPort}`,
+        '--no-sandbox',
+      ]);
+    } catch {
+      // 回退：直接用 appPath 拉起
+      await execFileAsync('open', [
+        target.appPath,
+        '--args',
+        `--remote-debugging-port=${target.cdpPort}`,
+        '--no-sandbox',
+      ]).catch(() => {});
+    }
+  } else if (process.platform === 'linux') {
+    execFileAsync(target.appPath, [
+      `--remote-debugging-port=${target.cdpPort}`,
+      '--no-sandbox',
+    ]).catch(() => {});
+  } else {
+    // Windows
+    execFileAsync('cmd', ['/c', 'start', '', target.appPath,
+      `--remote-debugging-port=${target.cdpPort}`,
+      '--no-sandbox',
+    ]).catch(() => {});
+  }
+}
+
 async function ensureTargetRunning(target: TargetConfig): Promise<boolean> {
   // Step 1: Check if app is installed
   const fsSync = await import('node:fs');
@@ -192,43 +345,32 @@ async function ensureTargetRunning(target: TargetConfig): Promise<boolean> {
     }
   }
 
-  // Step 2: Check if already running with CDP port (TCP probe, 不走 Chromium 网络栈)
-  if (await probeCdpPort(target.cdpPort, 1500)) return true; // Already running
+  // Step 2: 端口已开（已带调试端口在跑）→ 直接返回，无需任何操作
+  if (await probeCdpPort(target.cdpPort, 1500)) return true;
 
-  // Step 3: Auto-launch the app
-  if (target.appPath) {
+  // Step 3: 应用在跑但没带端口 → 先优雅退出，再带端口重拉。
+  // 否则 open --args 只会把已运行实例提到前台、加不上端口（Cursor/部分 IDE 的
+  // 瘦启动器会在无 GUI LaunchServices 会话下剥掉参数），皮肤永远注不进去。
+  if (target.appPath && (await isAppRunning(target.appPath, target.bundleId))) {
     try {
-      const { execFile } = await import('node:child_process');
-      const { promisify } = await import('node:util');
-      const execFileAsync = promisify(execFile);
-
-      if (process.platform === 'darwin') {
-        await execFileAsync('open', [
-          target.appPath,
-          '--args',
-          `--remote-debugging-port=${target.cdpPort}`,
-          '--no-sandbox',
-        ]);
-      } else if (process.platform === 'linux') {
-        execFileAsync(target.appPath, [
-          `--remote-debugging-port=${target.cdpPort}`,
-          '--no-sandbox',
-        ]).catch(() => {});
-      } else {
-        // Windows
-        execFileAsync('cmd', ['/c', 'start', '', target.appPath,
-          `--remote-debugging-port=${target.cdpPort}`,
-          '--no-sandbox',
-        ]).catch(() => {});
-      }
-
-      // Wait for app to start and CDP to be available (max 15s, TCP probe)
-      for (let i = 0; i < 15; i++) {
-        await new Promise(r => setTimeout(r, 1000));
-        if (await probeCdpPort(target.cdpPort, 800)) return true;
+      await quitApp(target.bundleId, target.name);
+      // 等进程退出、端口彻底关闭
+      for (let i = 0; i < 12; i++) {
+        await new Promise(r => setTimeout(r, 500));
+        if (!(await isAppRunning(target.appPath, target.bundleId))) break;
       }
     } catch (e) {
-      console.warn(`Failed to launch ${target.name}:`, (e as Error).message);
+      console.warn(`退出 ${target.name} 失败:`, (e as Error).message);
+    }
+  }
+
+  // Step 4: 用带调试端口的方式拉起
+  if (target.appPath) {
+    await launchWithDebugPort(target);
+    // 等 App 启动、CDP 可用（最多 20s，TCP 探测）
+    for (let i = 0; i < 20; i++) {
+      await new Promise(r => setTimeout(r, 1000));
+      if (await probeCdpPort(target.cdpPort, 800)) return true;
     }
   }
 
@@ -252,6 +394,29 @@ async function applyCurrentTheme() {
   if (currentTheme) {
     await skinManager.applyTheme(currentTheme.theme.id, target, options);
   }
+  saveState();
+}
+
+// 自动补回：每隔几秒检查当前目标的皮肤样式是否还在（IDE 整页重载会冲掉注入的
+// <style>），丢了就自动重注。配合注入器内的页面内自修复，覆盖“无重载”与“整页重载”两种掉皮肤场景。
+let autoHealTimer: ReturnType<typeof setInterval> | null = null;
+function startAutoHeal() {
+  if (autoHealTimer) return;
+  autoHealTimer = setInterval(async () => {
+    if (!skinManager) return;
+    const target = getCurrentTarget();
+    // 端口没开就不探测；只在端口开时重注，避免干扰未启动的 IDE
+    if (!(await probeCdpPort(target.cdpPort, 800))) return;
+    try {
+      const applied = await isApplied(target.cdpPort);
+      if (!applied) {
+        console.log(`[autoHeal] ${target.name} 皮肤样式丢失，自动重注`);
+        await applyCurrentTheme();
+      }
+    } catch {
+      // 单次探测异常忽略
+    }
+  }, 5000);
 }
 
 function createPetWindow() {
@@ -450,6 +615,7 @@ async function rebuildMenu() {
         if (customImagePath) options.customImagePath = customImagePath;
         options.fontFamily = currentFontStack(p.theme);
         await skinManager!.applyTheme(p.theme.id, target, options);
+        saveState();
         rebuildMenu();
       } catch (e) {
         dialog.showErrorBox(
@@ -613,7 +779,8 @@ async function rebuildMenu() {
               await skinManager!.restore(target);
               customImagePath = null;
               currentOpacity = 1;
-              currentBackgroundMode = 'repeat';
+              currentBackgroundMode = 'cover';
+              saveState();
               rebuildMenu();
             } catch (e) {
               dialog.showErrorBox(
@@ -790,20 +957,38 @@ app.whenReady().then(async () => {
   await rebuildMenu();
 
   try {
+    // 恢复上次持久化的选择（皮肤 / 目标 / 选项），重启后无需手动重切即可重新注入最新代码
+    const persisted = loadPersistedState();
+    if (persisted) {
+      currentTargetId = persisted.targetId ?? currentTargetId;
+      currentOpacity = persisted.opacity ?? currentOpacity;
+      currentBackgroundMode = persisted.backgroundMode ?? currentBackgroundMode;
+      currentFontFamily = persisted.fontFamily ?? currentFontFamily;
+      customImagePath = persisted.customImagePath ?? null;
+    }
     const target = getCurrentTarget();
     // 启动期只做"目标已在运行"的探测；未运行则不注入（也不自动拉起 IDE），
-    // 避免直接注入抛 ECONNREFUSED。手动换肤走菜单项的 ensureTargetRunning（会按需启动）。
+    // 避免直接注入抛 ECONNREFUSED 或干扰正在使用的 IDE。手动换肤走菜单项的
+    // ensureTargetRunning（会按需启动）。
     if (await probeCdpPort(target.cdpPort, 1500)) {
-      await skinManager.applyTheme('preset-guilin-ink-mountains', target, {
+      const applyId = persisted?.themeId ?? 'preset-guilin-ink-mountains';
+      await skinManager.applyTheme(applyId, target, {
         opacity: currentOpacity,
         backgroundMode: currentBackgroundMode,
-        fontFamily: currentFontStack({ id: 'preset-guilin-ink-mountains' }),
+        fontFamily: currentFontStack(skinManager.getCurrentTheme()?.theme),
+        ...(customImagePath ? { customImagePath } : {}),
       });
+      // 把（可能已迁移的）状态落盘，使 skindeck-state.json 反映真实生效值，
+      // 并写入 schemaVersion，避免每次重启都重复迁移。
+      saveState();
     }
     rebuildMenu();
   } catch (e) {
     console.warn('默认主题应用失败:', (e as Error).message);
   }
+
+  // 启动自动补回：IDE 整页重载后自动恢复皮肤
+  startAutoHeal();
 
   // 启动时不再自动联网检查更新 —— 联网 fetch 在受限网络环境下会触发 Chromium
   // network service 崩溃并导致整个 App 退出。如需手动检查更新，使用托盘菜单里的

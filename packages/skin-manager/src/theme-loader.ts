@@ -7,8 +7,28 @@ export interface LoadedTheme {
   theme: Theme;
   themeDir: string;
   imgAbs: string;
+  /** file:// URL（仅作元数据/调试用） */
   imgUrl: string;
+  /** base64 data URI —— 注入 CSS 背景图时使用，绕开跨源 file:// 拦截 */
+  imgDataUri: string;
   imgSize: number;
+}
+
+function mimeOf(p: string): string {
+  const ext = path.extname(p).toLowerCase();
+  if (ext === '.png') return 'image/png';
+  if (ext === '.jpg' || ext === '.jpeg') return 'image/jpeg';
+  if (ext === '.webp') return 'image/webp';
+  if (ext === '.gif') return 'image/gif';
+  if (ext === '.svg') return 'image/svg+xml';
+  return 'image/png';
+}
+
+/** 读取图片文件并转为 base64 data URI（内联进 CSS，避免 Chromium 跨源 file:// 拦截） */
+export async function fileToDataUri(absPath: string): Promise<string> {
+  const buf = await fs.readFile(absPath);
+  const mime = mimeOf(absPath);
+  return `data:${mime};base64,${buf.toString('base64')}`;
 }
 
 export async function loadTheme(themeDir: string): Promise<LoadedTheme> {
@@ -35,8 +55,10 @@ export async function loadTheme(themeDir: string): Promise<LoadedTheme> {
 
   const stat = await fs.stat(imgAbs);
   const imgUrl = pathToFileURL(imgAbs).href;
+  // 关键修复：注入用 data URI，Chromium 才会真正加载背景图
+  const imgDataUri = await fileToDataUri(imgAbs);
 
-  return { theme, themeDir, imgAbs, imgUrl, imgSize: stat.size };
+  return { theme, themeDir, imgAbs, imgUrl, imgDataUri, imgSize: stat.size };
 }
 
 export async function listPresets(presetsDir: string): Promise<string[]> {

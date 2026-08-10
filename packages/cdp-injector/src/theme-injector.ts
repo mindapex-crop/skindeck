@@ -36,7 +36,7 @@ export function buildThemeCss(theme: Theme, imgUrl: string, target: TargetType, 
 
   const finalImgUrl = options.customImageUrl || imgUrl;
   const opacityFactor = options.opacity ?? 1;
-  const bgMode = options.backgroundMode ?? 'repeat';
+  const bgMode = options.backgroundMode ?? 'cover';
   const autoFit = options.autoFit ?? false;
 
   // 焦点定位：autoFit 时由运行时分析覆盖，否则固定用 theme.json 焦点
@@ -132,9 +132,14 @@ html.${HTML_CLASS} #root > .teams-container {
   position: relative;
 }
 
+/* WorkBuddy 真实的内容面板类名是 main-content--chat / _gridViewItem_* 等哈希类名，
+   旧规则只认 conversation-sidebar / teams-content-wrapper / grid_，会漏掉它们，
+   导致这些不透明面板盖住背景图。这里用前缀匹配把它们全部透掉，让背景图露出来。 */
 html.${HTML_CLASS} #root > .teams-container [class*="grid_"],
 html.${HTML_CLASS} #root > .teams-container [class*="gridView_"],
-html.${HTML_CLASS} #root > .teams-container [class*="gridViewItem_"] {
+html.${HTML_CLASS} #root > .teams-container [class*="gridViewItem_"],
+html.${HTML_CLASS} #root > .teams-container [class*="main-content"],
+html.${HTML_CLASS} #root > .teams-container [class*="cb-markdown"] {
   background-color: transparent !important;
   background: transparent !important;
 }
@@ -143,9 +148,10 @@ html.${HTML_CLASS} #root > .teams-container::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: ${panelBg};
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  /* 全屏蒙版只用于轻微统一底色，必须足够透，否则会把背景图洗成纯色。
+     注意：这里绝不能用 backdrop-filter: blur，否则会把底层背景图一起糊掉
+     （用户反馈“很糊”就是这个原因）。只保留一层很淡的色调统一，图片保持清晰。 */
+  background: ${adjustAlpha(panelBg, 0.18)};
   z-index: 0;
   pointer-events: none;
 }
@@ -158,7 +164,7 @@ html.${HTML_CLASS} #root > .teams-container > * {
 html.${HTML_CLASS} body.cb-dark #root > .teams-container::before,
 html.${HTML_CLASS} body.vscode-dark #root > .teams-container::before,
 html.${HTML_CLASS} body.dark #root > .teams-container::before {
-  background: ${panelBgDark};
+  background: ${adjustAlpha(panelBgDark, 0.35)};
 }
 
 html.${HTML_CLASS} #root > .teams-container .conversation-sidebar,
@@ -360,6 +366,27 @@ export function buildInjectScript(
 
   ${artScript}
 
+  // 自修复：若皮肤样式被页面(未整页重载)移除，自动补回，避免“掉皮肤”。
+  (function selfHeal(){
+    if (window.__skinsSelfHeal__) return;
+    window.__skinsSelfHeal__ = true;
+    const cssStr = css, themeIdStr = themeId, targetStr = target;
+    function reinjectIfMissing(){
+      const s = document.getElementById(STYLE_ID);
+      if (s && s.textContent && s.textContent.length > 100) return;
+      const style = document.createElement('style');
+      style.id = STYLE_ID;
+      style.textContent = cssStr;
+      (document.head || document.documentElement).appendChild(style);
+      document.documentElement.classList.add(HTML_CLASS);
+      document.documentElement.setAttribute('${TARGET_ATTR}', targetStr);
+      document.documentElement.setAttribute('${ACTIVE_ATTR}', themeIdStr);
+    }
+    setInterval(reinjectIfMissing, 2000);
+    const headEl = document.head || document.documentElement;
+    new MutationObserver(reinjectIfMissing).observe(headEl, { childList: true });
+  })();
+
   let bgEl = document.body;
   if (target === 'workbuddy') bgEl = document.querySelector('#root > .teams-container') || document.body;
   else if (target === 'vscode-fork') bgEl = document.querySelector('.monaco-workbench .part.background') || document.body;
@@ -418,5 +445,12 @@ export const RESTORE_SCRIPT = `
     before,
     after,
   };
+})();
+`;
+
+export const CHECK_SCRIPT = `
+(function () {
+  const s = document.getElementById('skins-theme-style');
+  return !!(s && s.textContent && s.textContent.length > 100);
 })();
 `;

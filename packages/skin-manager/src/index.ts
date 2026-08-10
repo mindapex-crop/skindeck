@@ -1,5 +1,5 @@
-import { injectTheme, restoreTheme, detectTarget } from '@skins/cdp-injector';
-import { loadTheme, loadAllPresets, type LoadedTheme } from './theme-loader.js';
+import { injectTheme, restoreTheme, detectTarget, isApplied } from '@skins/cdp-injector';
+import { loadTheme, loadAllPresets, fileToDataUri, type LoadedTheme } from './theme-loader.js';
 import type { TargetConfig, InjectResult, RestoreResult } from '@skins/shared';
 
 export type {
@@ -53,18 +53,27 @@ export class SkinManager {
   async applyTheme(themeId: string, target: TargetConfig, options: ApplyOptions = {}): Promise<InjectResult[]> {
     const themeDir = `${this.presetsDir}/${themeId}`;
     const loaded = await loadTheme(themeDir);
-    
+
+    // 自定义图片同样转成 data URI，避免 file:// 跨源被 Chromium 拦截
+    let customImageUrl: string | undefined;
+    if (options.customImagePath) {
+      try {
+        customImageUrl = await fileToDataUri(options.customImagePath);
+      } catch {
+        customImageUrl = undefined;
+      }
+    }
+
     const injectOptions = {
       opacity: options.opacity,
-      customImageUrl: options.customImagePath 
-        ? `file://${options.customImagePath}`
-        : undefined,
+      customImageUrl,
       backgroundMode: options.backgroundMode,
       fontFamily: options.fontFamily,
       autoFit: options.autoFit ?? loaded.theme.art?.autoFit ?? false,
     };
-    
-    const results = await injectTheme(target.cdpPort, loaded.theme, loaded.imgUrl, injectOptions);
+
+    // 关键修复：注入背景图用 data URI（loaded.imgDataUri），而非 file://
+    const results = await injectTheme(target.cdpPort, loaded.theme, loaded.imgDataUri, injectOptions);
     this.currentTheme = loaded;
     this.currentTarget = target;
     this.currentOptions = options;
@@ -93,3 +102,4 @@ export class SkinManager {
 }
 
 export { loadTheme, loadAllPresets, listPresets } from './theme-loader.js';
+export { isApplied } from '@skins/cdp-injector';

@@ -1,5 +1,5 @@
 import { listPages, evaluate } from './cdp.js';
-import { buildThemeCss, buildInjectScript, DETECT_SCRIPT, RESTORE_SCRIPT } from './theme-injector.js';
+import { buildThemeCss, buildInjectScript, DETECT_SCRIPT, RESTORE_SCRIPT, CHECK_SCRIPT } from './theme-injector.js';
 import type { Theme, TargetType, InjectResult, RestoreResult } from '@skins/shared';
 import type { InjectOptions } from './theme-injector.js';
 
@@ -38,4 +38,21 @@ export async function restoreTheme(port: number): Promise<RestoreResult[]> {
 }
 
 export { listPages, evaluate } from './cdp.js';
-export { buildThemeCss, buildInjectScript, DETECT_SCRIPT, RESTORE_SCRIPT } from './theme-injector.js';
+export { buildThemeCss, buildInjectScript, DETECT_SCRIPT, RESTORE_SCRIPT, CHECK_SCRIPT } from './theme-injector.js';
+
+/**
+ * 检测目标端口的页面是否已应用皮肤（用于“整页重载后自动补回”）。
+ * 任一 page 含有效 skins-theme-style 即视为已应用。
+ */
+export async function isApplied(port: number): Promise<boolean> {
+  try {
+    const pages = await listPages(port);
+    for (const page of pages) {
+      const ok = await evaluate(page.webSocketDebuggerUrl, CHECK_SCRIPT);
+      if (ok) return true;
+    }
+  } catch {
+    // 端口未开或探测失败，视为未应用
+  }
+  return false;
+}
