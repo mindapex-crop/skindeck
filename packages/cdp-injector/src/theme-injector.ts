@@ -148,10 +148,9 @@ html.${HTML_CLASS} #root > .teams-container::before {
   content: "";
   position: absolute;
   inset: 0;
-  /* 全屏蒙版只用于轻微统一底色，必须足够透，否则会把背景图洗成纯色。
-     注意：这里绝不能用 backdrop-filter: blur，否则会把底层背景图一起糊掉
-     （用户反馈“很糊”就是这个原因）。只保留一层很淡的色调统一，图片保持清晰。 */
-  background: ${adjustAlpha(panelBg, 0.18)};
+  /* 方向性深色渐变蒙版：给聊天区文字压暗、提升对比，背景图仍清晰可见（codex 式）。
+     注意：这里只压暗、不加 backdrop-filter，避免把背景图整体糊掉。 */
+  background: linear-gradient(115deg, rgba(8,12,20,0.52) 0%, rgba(8,12,20,0.30) 55%, rgba(8,12,20,0.46) 100%);
   z-index: 0;
   pointer-events: none;
 }
@@ -161,10 +160,33 @@ html.${HTML_CLASS} #root > .teams-container > * {
   z-index: 1;
 }
 
-html.${HTML_CLASS} body.cb-dark #root > .teams-container::before,
-html.${HTML_CLASS} body.vscode-dark #root > .teams-container::before,
-html.${HTML_CLASS} body.dark #root > .teams-container::before {
-  background: ${adjustAlpha(panelBgDark, 0.35)};
+/* ===== 磨砂玻璃面板：侧边栏 / 顶栏 / 输入框（深色玻璃，背景从背后透出 = 铺平） =====
+   模糊只作用在面板“背后的背景”上（磨砂感、透出背景），文字本身依旧清晰。 */
+html.${HTML_CLASS} #root > .teams-container .conversation-list,
+html.${HTML_CLASS} #root > .teams-container .workbuddy-topbar,
+html.${HTML_CLASS} #root > .teams-container [class*="mainArea"] {
+  background-color: rgba(14, 18, 28, 0.55) !important;
+  background: rgba(14, 18, 28, 0.55) !important;
+  backdrop-filter: blur(18px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(150%) !important;
+}
+/* 旧类名兜底 */
+html.${HTML_CLASS} #root > .teams-container .conversation-sidebar,
+html.${HTML_CLASS} #root > .teams-container .teams-content-wrapper {
+  background-color: rgba(14, 18, 28, 0.55) !important;
+  background: rgba(14, 18, 28, 0.55) !important;
+  backdrop-filter: blur(18px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(150%) !important;
+}
+/* 玻璃面板细分隔线，用 accent 协调（自动取色跟随壁纸） */
+html.${HTML_CLASS} #root > .teams-container .conversation-list {
+  border-right: 1px solid color-mix(in srgb, ${accentVar} 35%, transparent) !important;
+}
+html.${HTML_CLASS} #root > .teams-container .workbuddy-topbar {
+  border-bottom: 1px solid color-mix(in srgb, ${accentVar} 35%, transparent) !important;
+}
+html.${HTML_CLASS} #root > .teams-container [class*="mainArea"] {
+  border-top: 1px solid color-mix(in srgb, ${accentVar} 35%, transparent) !important;
 }
 
 html.${HTML_CLASS} #root > .teams-container .conversation-sidebar,
@@ -172,7 +194,21 @@ html.${HTML_CLASS} #root > .teams-container .teams-content-wrapper {
   background: transparent !important;
 }
 
-/* 文字 / 边框跟随主题（保守：仅作用于容器文本与表单，不动布局） */
+/* 文字 / 边框：深色玻璃下用浅色文字保证可读；accent 跟随壁纸自动取色 */
+html.${HTML_CLASS} #root > .teams-container {
+  --vscode-foreground: #eef1f6 !important;
+  --vscode-editor-foreground: #eef1f6 !important;
+  --vscode-sideBar-foreground: #eef1f6 !important;
+  --vscode-titleBar-activeForeground: #eef1f6 !important;
+  --vscode-statusBar-foreground: #eef1f6 !important;
+  --vscode-icon-foreground: #eef1f6 !important;
+  --vscode-descriptionForeground: #9aa4b2 !important;
+  --vscode-editorLineNumber-foreground: #9aa4b2 !important;
+  --vscode-textLink-foreground: ${accentVar} !important;
+  --vscode-focusBorder: ${accentVar} !important;
+  --vscode-button-foreground: #eef1f6 !important;
+  --vscode-button-secondaryForeground: #eef1f6 !important;
+}
 html.${HTML_CLASS} #root > .teams-container,
 html.${HTML_CLASS} #root > .teams-container p,
 html.${HTML_CLASS} #root > .teams-container span:not([class*="codicon"]),
@@ -183,14 +219,14 @@ html.${HTML_CLASS} #root > .teams-container h1,
 html.${HTML_CLASS} #root > .teams-container h2,
 html.${HTML_CLASS} #root > .teams-container h3,
 html.${HTML_CLASS} #root > .teams-container h4 {
-  color: ${textLight} !important;
+  color: #eef1f6 !important;
 }
 html.${HTML_CLASS} #root > .teams-container input,
 html.${HTML_CLASS} #root > .teams-container textarea,
 html.${HTML_CLASS} #root > .teams-container select,
 html.${HTML_CLASS} #root > .teams-container button {
-  color: ${textLight} !important;
-  border-color: ${lineVar} !important;
+  color: #eef1f6 !important;
+  border-color: color-mix(in srgb, ${accentVar} 45%, transparent) !important;
 }
 html.${HTML_CLASS} #root > .teams-container a {
   color: ${accentVar} !important;

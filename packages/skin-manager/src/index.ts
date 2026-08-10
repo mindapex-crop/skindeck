@@ -69,7 +69,9 @@ export class SkinManager {
       customImageUrl,
       backgroundMode: options.backgroundMode,
       fontFamily: options.fontFamily,
-      autoFit: options.autoFit ?? loaded.theme.art?.autoFit ?? false,
+      // 默认开启自动取色（跟随壁纸 accent/焦点/安全区）；调用方显式传 false 才关闭。
+      // 注意：预设里 art.autoFit:false 不再作为关闭开关，统一以“自动取色”为默认体验。
+      autoFit: options.autoFit ?? true,
     };
 
     // 关键修复：注入背景图用 data URI（loaded.imgDataUri），而非 file://
